@@ -34,5 +34,63 @@ else:
         print("something went wrong")
             
             
-             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone') {
+            steps {
+                git branch: 'master', url: 'https://github.com/jaybankar07/CICD.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'javac CICD.java'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                sh 'java CICD'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and execution successful!'
+        }
+        failure {
+            echo 'Build or execution failed!'
+        }
+    }
+}
 
